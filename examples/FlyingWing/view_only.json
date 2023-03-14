@@ -1,0 +1,65 @@
+{
+    "CG" : [0,0,0],
+    "weight" : 50.0,
+    "reference" : {
+    },
+    "controls" : {
+        "aileron" : {
+            "is_symmetric" : false
+        },
+        "elevator" : {
+            "is_symmetric" : true
+        }
+    },
+    "airfoils" : {
+        "NACA_0010" : {
+            "type" : "linear",
+            "aL0" : 0.0,
+            "CLa" : 6.283185307179586,
+            "CmL0" : 0.0,
+            "Cma" : 0.0,
+            "CD0" : 0.0,
+            "CD1" : 0.0,
+            "CD2" : 0.0,
+            "CL_max" : 1.4
+        }
+    },
+    "wings" : {
+        "main_wing" : {
+            "ID" : 1,
+            "connect_to" : {
+                "ID" : 0,
+                "dz" : -0.1
+            },
+            "side" : "both",
+            "is_main" : true,
+            "semispan" : 4.0,
+            "sweep" : 0,
+            "twist" : 10,
+            "dihedral" : 0.0,
+            "chord" : 1,
+            "airfoil" : "NACA_0010",
+            "grid" : {
+                "N" : 50             
+            }
+        },
+        "mirrored_wing" : {
+            "ID" : 2,
+            "connect_to" : {
+                "ID" : 0,
+                "dz" : 0.1
+            },
+            "side" : "both",
+            "is_main" : true,
+            "semispan" : 4.0,
+            "sweep" : 0,
+            "twist" : -10,
+            "dihedral" : 0.0,
+            "chord" : 1,
+            "airfoil" : "NACA_0010",
+            "grid" : {
+                "N" : 50 
+            }
+        }
+    }
+}

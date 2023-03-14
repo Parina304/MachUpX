@@ -20,10 +20,10 @@
         "atmosphere" : {},
         "aircraft" : {
             "flying_wing" : {
-                "file" : "flying_wing.json",
+                "file" : "flying_wing_c.json",
                 "state" : {
                     "velocity" : 100,
-                    "alpha" : 2.0,
+                    "alpha" : 0.0,
                     "beta" : 0.0
                 },
                 "control_state" : {
@@ -34,3 +34,4 @@
         }
     }
 }
+
