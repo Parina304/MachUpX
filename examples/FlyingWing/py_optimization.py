@@ -37,13 +37,23 @@ def obj_fun(twist,dz):
     
     my_scene = MX.Scene(input_file)
     
-    FM_results = my_scene.solve_forces(dimensional=True, non_dimensional=False, verbose=True, report_by_segment = True)
+    # FM_results = my_scene.solve_forces(dimensional=True, non_dimensional=False, verbose=True, report_by_segment = True)
     
-    fl = FM_results["flying_wing"]["inviscid"]["FL"]["main_wing_left"] + FM_results["flying_wing"]["inviscid"]["FL"]["main_wing_right"]
+    # fl = FM_results["flying_wing"]["inviscid"]["FL"]["main_wing_left"] + FM_results["flying_wing"]["inviscid"]["FL"]["main_wing_right"]
     
-    fd = FM_results["flying_wing"]["inviscid"]["FD"]["main_wing_left"] + FM_results["flying_wing"]["inviscid"]["FD"]["main_wing_right"]
+    # fd = FM_results["flying_wing"]["inviscid"]["FD"]["main_wing_left"] + FM_results["flying_wing"]["inviscid"]["FD"]["main_wing_right"]
     
-    return fl
+    FM_results = my_scene.solve_forces(dimensional=False, non_dimensional=True, verbose=True, report_by_segment = True)
+    
+    distributions_for_CDi = my_scene.distributions(dimensional=False, non_dimensional=True, verbose=True, report_by_segment = True)
+    
+    cd_i = sum(distributions_for_CDi["flying_wing"]["main_wing_left"]["CD_i"] + distributions_for_CDi["flying_wing"]["main_wing_right"]["CD_i"])
+    
+    cl = FM_results["flying_wing"]["inviscid"]["CL"]["main_wing_left"] + FM_results["flying_wing"]["inviscid"]["CL"]["main_wing_right"]
+    
+    cd = FM_results["flying_wing"]["inviscid"]["CD"]["main_wing_left"] + FM_results["flying_wing"]["inviscid"]["CD"]["main_wing_right"]
+    
+    return cl # add outputs for cd and cdi and work those into later code
 
 FL = obj_fun(2, -100)
 print("Lift Force:", FL)
