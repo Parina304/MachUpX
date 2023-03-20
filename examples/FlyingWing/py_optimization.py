@@ -17,10 +17,9 @@ import matplotlib.pyplot as plt
 
 
 #Objective function to calculate lift force when given twist and height above ground. 
-def obj_fun(twist,dz):
+def obj_fun(twist,dz, output='CL'): # add extra input to decide what value is output
     
-    with open('flying_wing.json', 'r') as openfile:
-        
+    with open('flying_wing.json', 'r') as openfile:        
         flying_wing_mod = json.load(openfile)
     
     flying_wing_mod["wings"]["main_wing"]["twist"] = float(twist)
@@ -53,10 +52,18 @@ def obj_fun(twist,dz):
     
     cd = FM_results["flying_wing"]["inviscid"]["CD"]["main_wing_left"] + FM_results["flying_wing"]["inviscid"]["CD"]["main_wing_right"]
     
-    return cl # add outputs for cd and cdi and work those into later code
-
-FL = obj_fun(2, -100)
-print("Lift Force:", FL)
+    if output=="CL":
+        return cl # add outputs for cd and cdi and work those into later code
+    elif output=="CD":
+        return cd 
+    elif output=="CD_i":
+        return cd_i
+    else:
+        print('error')
+    
+    
+CL = obj_fun(2, -100)
+print("CL:", CL)
 
 # #Plot for lift force as a function of h/b
 # dz = np.linspace(0.1, 16, 30)
@@ -64,9 +71,9 @@ print("Lift Force:", FL)
 # for value in dz:
 #     lift_force = obj_fun(2,-value)
 #     results.append(lift_force)
-# plt.plot(dz, results)
-# plt.xlabel('dz')
-# plt.ylabel('Lift Force')
+# plt.plot(dz/8, results)
+# plt.xlabel('h/b')
+# plt.ylabel('CL')
 # plt.title("Lift Force as a Function of h/b")
 
 # # Plot for lift force as function of twist angle
@@ -85,9 +92,9 @@ print("Lift Force:", FL)
 #Main Wing: twist = 10, dz = -0.1
 #Mirrored Wing: twist = -10, dz = 0.1
 
-#Optimization 
+#%% Optimization 
 
-# FL_0 = 16.055
+# CL_0 = 0.08443422032568976
 # xstar = []
 # fstar = []
 
