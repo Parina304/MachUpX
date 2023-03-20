@@ -77,25 +77,94 @@ print("Lift Force:", FL)
 
 #Optimization 
 
-FL_0 = 16.055
-xstar = []
-fstar = []
+# FL_0 = 16.055
+# xstar = []
+# fstar = []
 
-for dz in np.linspace(0.8, 16, 10):
-    dz = -dz
-    fun = lambda tw: (obj_fun(tw, dz) - FL_0) ** 2
+# for dz in np.linspace(0.8, 16, 40):
+#     dz = -dz
+#     fun = lambda tw: (obj_fun(tw, dz) - FL_0) ** 2
 
-    sol = minimize(fun, 2.0, args=(), method='trust-constr', jac=None, hess=None, hessp=None,
-                    bounds=[(-10,10)], constraints=(), tol=1e-18, callback=None, options=None)
+#     sol = minimize(fun, 2.0, args=(), method='trust-constr', jac=None, hess=None, hessp=None,
+#                     bounds=[(-10,10)], constraints=(), tol=1e-18, callback=None, options=None)
     
-    x, f = sol.x, sol.fun
-    xstar.append(x)
-    fstar.append(f)
+#     x, f = sol.x, sol.fun
+#     xstar.append(x)
+#     fstar.append(f)
+
+# dz = np.linspace(0.8, 16, 40)
+# plt.plot(dz, fstar)
+# plt.xlabel("Height Above Ground")
+# plt.ylabel("Lift Force")
+# plt.title("Lift force as a Function of Height Above Ground")
+# plt.show()
+
+# Graph with heatmap
+# FL_0 = 16.055
+# dz_vals = np.linspace(0.8, 16, 40)
+# tw_vals = np.linspace(-10, 10, 21)
+# lift_vals = np.zeros((len(dz_vals), len(tw_vals)))
+
+# for i, dz in enumerate(dz_vals):
+#     for j, tw in enumerate(tw_vals):
+#         fun = lambda tw: (obj_fun(tw, -dz) - FL_0) ** 2
+#         sol = minimize(fun, tw, bounds=[(-10, 10)])
+#         lift_vals[i, j] = sol.fun
+
+# fig, ax = plt.subplots()
+# im = ax.imshow(lift_vals.T, cmap='coolwarm', origin='lower', extent=[min(dz_vals), max(dz_vals), min(tw_vals), max(tw_vals)])
+# cbar = ax.figure.colorbar(im, ax=ax)
+# cbar.ax.set_ylabel('Lift Force', rotation=-90, va="bottom")
+# ax.set_xlabel('Height Above Ground (m)')
+# ax.set_ylabel('Angle of Attack (deg)')
+# ax.set_title('Optimized Lift Force')
+# plt.show()
+
+# Graph with lift force and HAB
+
+# FL_0 = 16.055
+# xstar = []
+# fstar = []
+
+# for dz in np.linspace(0.8, 16, 40):
+#     dz = -dz
+#     fun = lambda tw: (obj_fun(tw, dz) - FL_0) ** 2
+
+#     sol = minimize(fun, 2.0, args=(), method='trust-constr', jac=None, hess=None, hessp=None,
+#                     bounds=[(-10,10)], constraints=(), tol=1e-18, callback=None, options=None)
     
-plt.plot(xstar, fstar)
-plt.xlabel("h/b")
-plt.ylabel("Lift Force")
-plt.title("Lift force as a function of height above ground")
-plt.show()
+#     x, f = sol.x, sol.fun
+#     xstar.append(x)
+#     fstar.append(f)
+
+# dz = np.linspace(0.8, 16, 40)
+# plt.plot(xstar, fstar)
+# plt.plot(dz, [FL_0] * len(dz))
+# plt.xlabel("Height Above Ground")
+# plt.ylabel("Lift Force")
+# plt.title("Optimized lift Force as a Function of Height Above Ground")
+# plt.show()
+
+
+# FL_0 = 16.055
+# dz_vals = np.linspace(0.8, 16, 10)
+# tw_vals = np.linspace(-10, 10, 21)
+# lift_vals = np.zeros((len(dz_vals), len(tw_vals)))
+# tw_opt_vals = np.zeros(len(dz_vals))
+
+# for i, dz in enumerate(dz_vals):
+#     for j, tw in enumerate(tw_vals):
+#         fun = lambda tw: (obj_fun(tw, -dz) - FL_0) ** 2
+#         sol = minimize(fun, tw, bounds=[(-10, 10)])
+#         lift_vals[i, j] = sol.fun
+#     j_opt = np.argmin(lift_vals[i, :])
+#     tw_opt_vals[i] = tw_vals[j_opt]
+
+# fig, ax = plt.subplots()
+# ax.plot(dz_vals, tw_opt_vals, 'o-')
+# ax.set_xlabel('Height Above Ground (m)')
+# ax.set_ylabel('Angle of Attack (deg)')
+# ax.set_title('Optimized Angle of Attack for Minimum Lift Force')
+# plt.show()
 
 
