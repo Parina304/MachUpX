@@ -81,7 +81,7 @@ plt.figure()
 plt.plot(dz/8, results)
 plt.xlabel('h/b') # b=8 (wing span)
 plt.ylabel('CL')
-# plt.title("Lift Force as a Function of h/b")
+plt.title(r"Ground effect holding $\alpha=2$ deg")
 
 #%%
 
@@ -130,7 +130,7 @@ plt.figure()
 plt.plot(dz/8, fstar)
 plt.xlabel("h/b") # b=8 (wing span)
 plt.ylabel(r"$(\Delta CL)^2$") # actually plotting the squared error here (want zero)
-# plt.title("Lift force as a Function of Height Above Ground")
+plt.title(r"Allowing $\alpha$ to change to negate ground effect on CL")
 plt.show()
 
 
@@ -139,7 +139,7 @@ plt.show()
 plt.figure()
 plt.plot(dz/8, xstar)
 plt.xlabel("h/b") # b=8 (wing span)
-plt.ylabel(r"$\alpha$")
+plt.ylabel(r"$\alpha^*$")
 
 
 #%%    Main figure 4 (corresponding to the previous two figures, what is the induced drag?)
